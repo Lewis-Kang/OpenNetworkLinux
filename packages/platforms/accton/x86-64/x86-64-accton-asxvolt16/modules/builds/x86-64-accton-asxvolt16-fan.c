@@ -343,22 +343,9 @@ static ssize_t fan_show_value(struct device *dev, struct device_attribute *da,
             case FAN4_PRESENT:
             case FAN5_PRESENT:
             case FAN6_PRESENT:
-#if 0
                 ret = sprintf(buf, "%d\n",
                               reg_val_to_is_present(data->reg_val[FAN_PRESENT_REG],
                               attr->index - FAN1_PRESENT));
-#else
-			{
-				int fid = attr->index - FAN1_PRESENT;
-				int present = 0;
-
-				if (data->reg_val[FAN1_FRONT_SPEED_RPM + fid] || 
-					data->reg_val[FAN1_REAR_SPEED_RPM + fid])  {
-					present = 1;
-				}
-                ret = sprintf(buf, "%d\n", present);
-			}
-#endif
                 break;
             case FAN1_FAULT:
             case FAN2_FAULT:
